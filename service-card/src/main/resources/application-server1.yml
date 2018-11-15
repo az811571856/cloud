@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: "service-card"
+
+server:
+  port: 8001
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://server1:8100/eureka,http://server2:8100/eureka
+
+
+management:
+  security:
+    enabled: false
+
+logging:
+  level:
+   root: INFO
+   org.springframework.cloud.sleuth: DEBUG
+
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/card?useSSL=false&characterEncoding=utf8&connectionCollation=utf8mb4_unicode_ci
+    connection-init-sqls: "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci;"
+    username: root
+    password: Passw0rd!@#$
+    max-active: 20
+    max-idle: 8
+    min-idle: 8
+    initial-size: 10
+    test-while-idle: true
+    validation-query: SELECT 1
